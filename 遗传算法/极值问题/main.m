@@ -1,16 +1,18 @@
 clear
 clc
 %% 初始化
-max_iter=100;%最大迭代次数
+global max_iter;%最大迭代次数
+max_iter=100;
 sizepop=300;%种群数量
 x_num=5;%未知参数
+global x_range;
 x_range=[0 pi;0 pi;0 pi;0 pi;0 pi];%参数取值范围
 
 best_chrom=[];
 individuals=struct('fitness',zeros(1,sizepop),'chrom',zeros(sizepop,x_num));
 
 for i=1:sizepop
-    individuals.chrom(i,:)=Initial(x_range,x_num);          %生成初始种群
+    individuals.chrom(i,:)=Initial(x_num);          %生成初始种群
     individuals.fitness(1,i)=1./fun(individuals.chrom(i,:));
 end
 [best_fitness,best_index]=max(individuals.fitness);     %存储最佳适应度种群
